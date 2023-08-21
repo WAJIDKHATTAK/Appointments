@@ -1,0 +1,13 @@
+ appointments
+users  book doctor appointment
+ doctor appointment slot => user book ? available : not available =>
+user can book or not book\line user cancel appointment another user can book appointment
+show free slots in 24 hour
+Another user cannot book appointment in same slot is booked
+/appointments/doctor/:doctorId/freeSlots
+                          .get(Send response with free slots of that specific doctor in 24 hour slot)\par
+                          .post(book a free slot with your appointment)\par
+                          .delete(Cancel a request for appointment)\par
+/doctors/:doctorId/appointments\par
+                       .get(Get status of all the appointments in 24 hour slot)\par
+                          status : booked : not booked anymore

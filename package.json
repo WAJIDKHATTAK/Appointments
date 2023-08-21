@@ -1,0 +1,49 @@
+{
+  "name": "appointments",
+  "version": "1.0.0",
+  "description": "appointments module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "pm2 start ecosystem.config.json",
+    "stop": "pm2 stop ecosystem.config.json",
+    "kill": "pm2 kill ",
+    "delete": "pm2 delete ecosystem.config.json",
+    "dev": "cross-env NODE_ENV=development nodemon src/index.js",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prettier": "prettier --check **/*.js",
+    "prettier:fix": "prettier --write **/*.js"
+  },
+  "keywords": [],
+  "author": "WAJID MUJIB",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^6.9.0",
+    "helmet": "^7.0.0",
+    "http-status": "^1.6.2",
+    "joi": "^17.9.2",
+    "jsonwebtoken": "^9.0.1",
+    "moment": "^2.29.4",
+    "mongoose": "^7.4.3",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "passport-jwt": "^4.0.1",
+    "uuid": "^9.0.0",
+    "winston": "^3.10.0",
+    "xss-clean": "^0.1.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.47.0",
+    "nodemon": "^3.0.1",
+    "prettier": "^3.0.2"
+  }
+}

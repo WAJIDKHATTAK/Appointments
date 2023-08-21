@@ -1,2 +1,18 @@
 # appointments
 apointments module
+
+"email":"saad1@gmail.com",
+"password":"lumberjack123"
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNjdiMDY3MWI3M2IzNzQ0OWUxM2IiLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNjkyNjI2MjIxLCJleHAiOjE3MjQxODM4MjF9.GXfAIro6reEO5-FbtDWrpAUtOOumvV0EFWXOsY96dhg
+
+"email":"wajid1@gmail.com",
+"password":"lumberjack123"
+	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNjg3OWYxZjIxYzZiOTQyNWQ3NzEiLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNjkyNjI1MDY4LCJleHAiOjE3MjQxODI2Njh9.6KaPhrRnRtjjIJdZ2ZUoT6qkDdUJZRGDfbIif5btWQc
+
+"email":"waynekerr@gmail.com",
+    "password":"lumberjack123"
+	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNzMwYWU0YTBhODUzODBkM2IyNGIiLCJyb2xlIjoidXNlciIsImlhdCI6MTY5MjYyNzgwMiwiZXhwIjoxNzI0MTg1NDAyfQ.ooao0brnneulK0yRIDZuZiLFHBLSGxkVP5PQ3C_9H1w
+
+"email":"scott1@gmail.com",
+    "password":"lumberjack123"
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGUzNzM4M2U0YTBhODUzODBkM2IyNGUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY5MjYyNzg2MywiZXhwIjoxNzI0MTg1NDYzfQ.x8m7liXu0FwGrOwYjLRSYBQmhAH3Bcd3hiHwKTJrCVc
