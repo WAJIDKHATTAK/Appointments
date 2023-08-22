@@ -23,7 +23,7 @@ router.post(
 	appointmentController.createAppointment,
 );
 router.delete(
-	"/delete-appointment/:appointmentId",
+	"/delete-appointment/user/:userId/appointment/:appointmentId",
 	validate(appointmentValidation.deleteAppointment),
 	appointmentController.deleteAppointment,
 );

@@ -28,8 +28,16 @@ const userSchema = mongoose.Schema({
 	},
 	appointments: [
 		{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Appointment",
+			fromTime: {
+				type: String, // Store as HH:mm format (e.g., "14:30")
+			},
+			toTime: {
+				type: String,
+			},
+			appointmentId: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Appointment",
+			},
 		},
 	],
 });

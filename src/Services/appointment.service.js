@@ -56,6 +56,7 @@ const checkDoctorFreeSlots = async (doctorId) => {
 		throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error);
 	}
 };
+
 const createAppointment = async (userId, doctorId, appointmentTime) => {
 	try {
 		const user = await User.findById(userId);
@@ -73,69 +74,111 @@ const createAppointment = async (userId, doctorId, appointmentTime) => {
 			doctorId,
 			appointmentTime,
 		);
-		if (!isSlotAvailable) {
+
+		const freeSlots = isSlotAvailable;
+
+		const userFromTime = appointmentTime.fromTime;
+		const userToTime = appointmentTime.toTime;
+
+		const isUserAppointmentValid = freeSlots.some((slot) => {
+			const slotFromTime = slot.appointmentSlot.split("-")[0];
+			const slotToTime = slot.appointmentSlot.split("-")[1];
+			return userFromTime >= slotFromTime && userToTime <= slotToTime;
+		});
+
+		if (!isUserAppointmentValid) {
 			throw new ApiError(
 				httpStatus.BAD_REQUEST,
-				"Selected slot is not available",
+				"User appointment time is not within available slots",
 			);
 		}
-
 		// Create the appointment
 		const appointment = await Appointment.create({
 			user: user._id,
 			doctor: doctor._id,
-			appointmentTime,
+			appointmentTime: {
+				fromTime: appointmentTime.fromTime,
+				toTime: appointmentTime.toTime,
+			},
 		});
 
-		// Update the doctor's appointments array with the new appointment
-		doctor.appointments.push({
-			appointmentTime,
-			appointmentId: appointment._id,
-		});
-		await doctor.save();
+		// Update the doctor's and user's appointments arrays with the new appointment
+		doctor.appointments.push(appointmentTime);
+		user.appointments.push(appointmentTime);
 
-		user.appointments.push({
-			appointmentTime,
-			appointmentId: appointment._id,
-		});
-		await user.save();
+		await Promise.all([doctor.save(), user.save()]);
 
 		return appointment;
 	} catch (error) {
 		throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error);
 	}
 };
+
+// const deleteAppointment = async (userId, appointmentId) => {
+// 	try {
+// 		const user = await User.findById(userId);
+// 		const appointment = await Appointment.findById(appointmentId);
+//         // console.log(appointment)
+// 		if (!user || !appointment) {
+// 			throw new ApiError(
+// 				httpStatus.BAD_REQUEST,
+// 				"User or Appointment not found",
+// 			);
+// 		}
+//         console.log("Appointment found:", appointment);
+// 		console.log("Doctor ID:", appointment.doctor);
+
+// 		const appointmentUserId = appointment.user.toString();
+// 		console.log("Appointment User ID:", appointmentUserId);
+
+// 		if (appointmentUserId  !== userId) {
+// 			throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized");
+// 		}
+
+// 		// Remove the appointment from the doctor's appointments array
+// 		const doctor = await Doctor.findById(appointment.doctor);
+// 		doctor.appointments = doctor.appointments.filter(
+// 			(apt) => apt.appointmentId.toString() !== appointmentId,
+// 		);
+// 		await doctor.save();
+
+// 		// Delete the appointment
+// 		await appointment.remove();
+// 	} catch (error) {
+// 		throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error);
+// 	}
+// };
 const deleteAppointment = async (userId, appointmentId) => {
 	try {
-		const user = await User.findById(userId);
 		const appointment = await Appointment.findById(appointmentId);
 
-		if (!user || !appointment) {
-			throw new ApiError(
-				httpStatus.BAD_REQUEST,
-				"User or Appointment not found",
-			);
+		if (!appointment) {
+			throw new ApiError(httpStatus.BAD_REQUEST, "Appointment not found");
 		}
 
-		// Check if the appointment belongs to the user
-		if (appointment.user.toString() !== userId) {
+		if (!appointment.user.equals(userId)) {
 			throw new ApiError(httpStatus.UNAUTHORIZED, "Unauthorized");
 		}
 
-		// Remove the appointment from the doctor's appointments array
-		const doctor = await Doctor.findById(appointment.doctor);
-		doctor.appointments = doctor.appointments.filter(
-			(apt) => apt.appointmentId.toString() !== appointmentId,
-		);
-		await doctor.save();
+		const doctorId = appointment.doctor;
 
-		// Delete the appointment
-		await appointment.remove();
+		await Promise.all([
+			Appointment.findByIdAndDelete(appointmentId),
+			Doctor.findByIdAndUpdate(
+				doctorId,
+				{ $pull: { appointments: { appointmentId } } },
+				{ new: true },
+			),
+		]);
+
+		return appointment;
 	} catch (error) {
-		throw new ApiError(httpStatus.INTERNAL_SERVER_ERROR, error);
+		throw new ApiError(
+			httpStatus.INTERNAL_SERVER_ERROR,
+			"Internal server error",
+		);
 	}
 };
-
 module.exports = {
 	checkDoctorAvailability,
 	checkDoctorFreeSlots,
