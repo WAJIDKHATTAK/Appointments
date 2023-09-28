@@ -23,14 +23,14 @@ A backend system for doctors to manage their work schedules and for users to boo
    ```bash
    git clone [repository-link]
   
-2. **Install Dependencies:
+2. **Install Dependencies**:
 	```bash
 	npm install
 	```
 
-3. **Environment Setup: Set up environment variables for JWT secret and MongoDB URI.
+3. **Environment Setup: Set up environment variables for JWT secret and MongoDB URI**.
 
-4. **Run the Server:
+4. **Run the Server**:
 	```bash
 	npm start 
 	```
