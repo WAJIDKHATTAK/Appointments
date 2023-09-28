@@ -22,4 +22,40 @@ A backend system for doctors to manage their work schedules and for users to boo
 1. **Clone the Repository**:
    ```bash
    git clone [repository-link]
+  
+2. **Install Dependencies:
+```bash
+npm install
+```
 
+3. **Environment Setup: Set up environment variables for JWT secret and MongoDB URI.
+
+4. Run the Server:
+```bash
+npm start 
+```
+
+📜 API Endpoints
+🔐 Authentication
+Login: POST /auth/login
+Register: POST /auth/register
+
+🩺 Doctor
+Set Schedule: POST /doctor/schedule
+Cancel All Appointments for the Day: DELETE /doctor/appointments
+
+🙋 User
+Book Appointment: POST /user/appointment
+Cancel Appointment: DELETE /user/appointment/:id
+View Available Slots: GET /user/slots
+
+🛡️ Security
+JWT Authentication: Secure routes are protected using JWT tokens.
+Authorization: Ensure users can only access and modify their own data.
+Joi Validation: All inputs are validated using Joi to ensure data integrity.
+
+🎨 Contributing
+Feel free to fork the repository and submit pull requests. For major changes, please open an issue first.
+
+📝 License
+This project is licensed under the MIT License.
