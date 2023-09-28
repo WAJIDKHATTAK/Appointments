@@ -24,16 +24,16 @@ A backend system for doctors to manage their work schedules and for users to boo
    git clone [repository-link]
   
 2. **Install Dependencies:
-```bash
-npm install
-```
+	```bash
+	npm install
+	```
 
 3. **Environment Setup: Set up environment variables for JWT secret and MongoDB URI.
 
-4. Run the Server:
-```bash
-npm start 
-```
+4. **Run the Server:
+	```bash
+	npm start 
+	```
 
 🛡️ Security
 JWT Authentication: Secure routes are protected using JWT tokens.
