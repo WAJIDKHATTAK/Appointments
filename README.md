@@ -35,20 +35,6 @@ npm install
 npm start 
 ```
 
-📜 API Endpoints
-🔐 Authentication
-Login: POST /auth/login
-Register: POST /auth/register
-
-🩺 Doctor
-Set Schedule: POST /doctor/schedule
-Cancel All Appointments for the Day: DELETE /doctor/appointments
-
-🙋 User
-Book Appointment: POST /user/appointment
-Cancel Appointment: DELETE /user/appointment/:id
-View Available Slots: GET /user/slots
-
 🛡️ Security
 JWT Authentication: Secure routes are protected using JWT tokens.
 Authorization: Ensure users can only access and modify their own data.
